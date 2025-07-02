@@ -1,9 +1,33 @@
-[![CI Tests](https://github.com/specialtactics/laravel-api-boilerplate/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/specialtactics/laravel-api-boilerplate/actions)
-[![License](https://img.shields.io/packagist/l/specialtactics/laravel-api-boilerplate.svg?style=flat-square)](LICENSE)
-[![Development Version](https://img.shields.io/packagist/vpre/specialtactics/laravel-api-boilerplate.svg?style=flat-square)](https://packagist.org/packages/specialtactics/laravel-api-boilerplate)
+### 🎵 Rhythm Imitation App (Laravel + JS)
 
+A desktop-focused web app for **practicing and evaluating rhythm imitation**, inspired by apps like [Complete Rhythm Trainer](https://play.google.com/store/apps/details?id=com.binaryguilt.completerhythmtrainer) and [Rhythmer](https://play.google.com/store/apps/details?id=ru.demax.rhythmerr).
 
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+Built with:
+
+* **Laravel (API backend)** for exercise structure, rhythm pattern storage, and progress tracking.
+* **JavaScript frontend** for interactive rhythm playback and tap-based input.
+* Designed to be **auth-optional** — anonymous play supported, with optional login for saving progress.
+
+---
+
+### 🔧 Features (MVP)
+
+* 🎼 Rhythm pattern database (BPM, time signature, note durations)
+* 🖱️ User input via tap key or button
+* 🧠 Evaluation engine comparing taps to expected rhythm
+* 📊 Progress tracking with scoring
+* 📁 API-first architecture (RESTful endpoints)
+
+---
+
+### 🚧 Roadmap
+
+* [ ] Add user authentication (optional)
+* [ ] Rhythm pattern composer/editor
+* [ ] Performance charts & streaks
+* [ ] Audio latency calibration
+* [ ] Gamification (XP, levels, medals)
+
 
 ## About Laravel API Boilerplate
 This is a boilerplate for writing RESTful API projects using Laravel. The aim of this boilerplate is to provide developers with scaffolding and common functionality which will make writing APIs exceedingly quick, efficient and convenient.
