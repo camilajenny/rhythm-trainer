@@ -12,7 +12,7 @@ class TapEvaluation extends BaseModel
     /**
      * @var string UUID key of the resource
      */
-    public $primaryKey = '_id';
+    public $primaryKey = 'id';
 
     /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
