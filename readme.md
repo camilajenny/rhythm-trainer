@@ -8,6 +8,8 @@ Built with:
 * **JavaScript frontend** for interactive rhythm playback and tap-based input.
 * Designed to be **auth-optional** — anonymous play supported, with optional login for saving progress.
 
+![simple-table.png](assets/simple-table.png)
+
 ---
 
 ### 🔧 Features (MVP)
