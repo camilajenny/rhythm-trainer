@@ -10,11 +10,6 @@ class ExerciseAttempt extends BaseModel
     use HasFactory;
 
     /**
-     * @var string UUID key of the resource
-     */
-    public $primaryKey = 'id';
-
-    /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
      */
     public static ?array $itemWith = [];
@@ -39,6 +34,10 @@ class ExerciseAttempt extends BaseModel
      * @var array The attributes that should be hidden for arrays and API output
      */
     protected $hidden = [];
+
+    protected $casts = [
+        'tap_data' => 'array',
+    ];
 
     /**
      * Return the validation rules for this model

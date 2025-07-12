@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\ExerciseAttempt;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TapEvaluationAttempt>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TapEvaluation>
  */
 class TapEvaluationFactory extends Factory
 {
@@ -17,6 +18,7 @@ class TapEvaluationFactory extends Factory
     public function definition(): array
     {
         return [
+            'exercise_attempt_id' => ExerciseAttempt::query()->inRandomOrder()->first()->id,
             'tap_index' => $this->faker->randomNumber(2),
             'expected_time' => $this->faker->randomfloat(2, 0, 1),
             'actual_time' => $this->faker->randomfloat(2, 0, 1),

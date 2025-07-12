@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RhythmPattern;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class ExerciseFactory extends Factory
             'description' => $this->faker->words(nb: 20, asText: true),
             'difficulty' => $this->faker->randomElement(['easy', 'medium', 'hard']),
             'bpm_override' => $this->faker->numberBetween(40, 180),
+            'rhythm_pattern_id' => RhythmPattern::query()->inrandomorder()->first()->id,
         ];
     }
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
 
+            $table->foreignId('exercise_id')->constrained('exercises')->onDelete('cascade');
+
             $table->json('tap_data');
             $table->integer('score');
             $table->timestamps();

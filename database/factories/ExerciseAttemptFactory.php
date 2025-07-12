@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Exercise;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +19,8 @@ class ExerciseAttemptFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::query()->inRandomOrder()->first()->user_id,
+            'exercise_id' => Exercise::query()->inRandomOrder()->first()->id,
             'tap_data' => $this->fakeTapData(),
             'score' => $this->faker->numberBetween(0, 100),
         ];

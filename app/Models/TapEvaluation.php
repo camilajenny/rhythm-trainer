@@ -10,11 +10,6 @@ class TapEvaluation extends BaseModel
     use HasFactory;
 
     /**
-     * @var string UUID key of the resource
-     */
-    public $primaryKey = 'id';
-
-    /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
      */
     public static ?array $itemWith = [];
