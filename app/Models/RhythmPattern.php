@@ -40,6 +40,25 @@ class RhythmPattern extends BaseModel
     ];
 
     /**
+     * Convert numeric note values to musical notation symbols
+     */
+    public function getMusicalNotationAttribute(): string
+    {
+        $symbols = [
+            4 => '𝅝',      // Whole note
+            2 => '𝅗𝅥',     // Half note
+            1 => '𝅘𝅥',     // Quarter note
+            0.5 => '𝅘𝅥𝅮',   // Eighth note
+            0.25 => '𝅘𝅥𝅯',  // Sixteenth note
+            0.125 => '𝅘𝅥𝅰', // Thirty-second note
+        ];
+
+        return collect($this->pattern_data)
+            ->map(fn($note) => $symbols[$note] ?? $note)
+            ->implode(' ');
+    }
+
+    /**
      * Return the validation rules for this model
      *
      * @return array Rules
