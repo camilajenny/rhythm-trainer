@@ -1,0 +1,9 @@
+.musical-notation {
+    font-family: 'Noto Music', 'Times New Roman', serif;
+    font-size: 1.8em;
+    letter-spacing: 0.3em;
+}
+
+table {
+    border-spacing: 1rem;
+}

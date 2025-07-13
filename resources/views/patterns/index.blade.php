@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rhythm Trainer</title>
+    <link rel="stylesheet" href="/css/rhythm-player.css">
+</head>
+<body>
+
 <h1>Rhythm Patterns</h1>
 <table>
     <tr>
@@ -10,17 +18,17 @@
             <td>{{ $pattern->name }}</td>
             <td>{{ $pattern->time_signature }}</td>
             <td class="musical-notation">{{ $pattern->musical_notation }}</td>
+            <td>
+                <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano1.wav" data-bpm="90">
+                    ▶️
+                </button>
+            </td>
         </tr>
     @endforeach
 </table>
 
-<style>
-    .musical-notation {
-        font-family: 'Noto Music', 'Times New Roman', serif;
-        font-size: 1.8em;
-        letter-spacing: 0.3em;
-    }
-    table {
-        border-spacing: 1rem;
-    }
-</style>
+<script src="/js/rhythm-player.js"></script>
+</body>
+</html>
+
+
