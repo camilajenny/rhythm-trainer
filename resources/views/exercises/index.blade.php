@@ -7,7 +7,11 @@
     </tr>
     @foreach ($exercises as $exercise)
         <tr>
-            <td>{{ $exercise->name }}</td>
+            <td>
+                <a href="{{ route('exercises.show', ['exercise' => $exercise->id]) }}">
+                    {{ $exercise->name }}
+                </a>
+            </td>
             <td>{{ $exercise->description }}</td>
             <td>{{ $exercise->difficulty }}</td>
         </tr>

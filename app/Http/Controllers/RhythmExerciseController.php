@@ -23,4 +23,10 @@ class RhythmExerciseController extends Controller
         $exercises = Exercise::all();
         return view('exercises.index', compact('exercises'));
     }
+
+    public function show(Exercise $exercise) {
+//        $exercise = Exercise::with('rhythmTracks.rhythmPattern')->findOrFail($exercise->id);
+        $exercise->load('rhythmTracks.rhythmPattern');
+        return view('exercises.show', compact('exercise'));
+    }
 }

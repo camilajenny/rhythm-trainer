@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\RhythmPattern;
 use App\Transformers\BaseTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo as BelongsToAlias;
 
 class RhythmTrack extends BaseModel
 {
     use HasFactory;
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     /**
      * @var string UUID key of the resource
@@ -50,9 +54,9 @@ class RhythmTrack extends BaseModel
         return [];
     }
 
-    public function rhythmPattern()
+    public function rhythmPattern() : BelongsToAlias
     {
-        return $this->belongsTo(RhythmPattern::class);
+        return $this->belongsTo(RhythmPattern::class, 'rhythm_pattern_id', 'id');
     }
 
     public function exercise()

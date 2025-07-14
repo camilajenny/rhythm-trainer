@@ -9,6 +9,8 @@ class Exercise extends BaseModel
 {
     use HasFactory;
 
+    public $primaryKey = 'id';
+
     /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
      */
