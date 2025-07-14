@@ -68,4 +68,8 @@ class RhythmPattern extends BaseModel
         return [];
     }
 
+    public function rhythmTracks()
+    {
+        return $this->hasMany(RhythmTrack::class);
+    }
 }

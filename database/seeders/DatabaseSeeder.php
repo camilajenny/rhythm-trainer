@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(RhythmPatternSeeder::class);
+        $this->call(RhythmTrackSeeder::class);
         $this->call(ExerciseSeeder::class);
         $this->call(ExerciseAttemptSeeder::class);
         $this->call(TapEvaluationSeeder::class);

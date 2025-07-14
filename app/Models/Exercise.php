@@ -21,7 +21,7 @@ class Exercise extends BaseModel
     public static ?array $collectionWith = null;
 
     /**
-     * @var null|BaseTransformer The transformer to use for this model, if overriding the default
+     * @var null|BaseTransformer The transformer to use for this model if overriding the default
      */
     public static $transformer = null;
 
@@ -45,4 +45,8 @@ class Exercise extends BaseModel
         return [];
     }
 
+    public function rhythmTracks()
+    {
+        return $this->hasMany(RhythmTrack::class);
+    }
 }

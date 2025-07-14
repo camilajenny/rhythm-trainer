@@ -5,9 +5,14 @@ namespace App\Models;
 use App\Transformers\BaseTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TapEvaluation extends BaseModel
+class RhythmTrack extends BaseModel
 {
     use HasFactory;
+
+    /**
+     * @var string UUID key of the resource
+     */
+    public $primaryKey = 'id';
 
     /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
@@ -28,7 +33,7 @@ class TapEvaluation extends BaseModel
     /**
      * @var array The attributes that are mass assignable.
      */
-    protected $fillable = ['tap_index', 'expected_time', 'actual_time', 'is_correct', 'deviation'];
+    protected $fillable = [ 'track_index' ];
 
     /**
      * @var array The attributes that should be hidden for arrays and API output
@@ -45,4 +50,13 @@ class TapEvaluation extends BaseModel
         return [];
     }
 
+    public function rhythmPattern()
+    {
+        return $this->belongsTo(RhythmPattern::class);
+    }
+
+    public function exercise()
+    {
+        return $this->belongsTo(Exercise::class);
+    }
 }
