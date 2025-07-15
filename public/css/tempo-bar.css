@@ -1,115 +1,106 @@
 .musical-notation-container {
-    position: relative;
-    padding: 20px 10px;
-    min-height: 60px;
-    background: #f8f9fa;
-    border-radius: 8px;
+  position: relative;
+  padding: 20px 10px;
+  min-height: 60px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+.musical-notation-container.playing {
+  background: #e8f4fd;
+  transition: background-color 0.2s ease;
+}
+.musical-notation-container.playing .tempo-bar-overlay {
+  display: block !important;
 }
 
 .musical-notation {
-    font-family: 'Noto Music', 'Times New Roman', serif;
-    font-size: 1.8em;
-    letter-spacing: 0.3em;
-    position: relative;
-    z-index: 1;
+  font-family: "Noto Music", "Times New Roman", serif;
+  font-size: 1.8em;
+  letter-spacing: 0.3em;
+  position: relative;
+  z-index: 1;
 }
 
 .tempo-bar-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .tempo-progress-overlay {
-    position: absolute;
-    bottom: 5px;
-    left: 10px;
-    height: 4px;
-    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
-    width: 0;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    transition: width 0ms linear;
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+  width: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: width 0ms linear;
 }
-
 .tempo-progress-overlay::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
-    background: #007bff;
-    border-radius: 50%;
-    box-shadow: 0 0 4px rgba(0,123,255,0.5);
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #007bff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+.tempo-progress-overlay.beating {
+  animation: beat-pulse-overlay 0.15s ease-out;
 }
 
 .beat-markers-overlay {
-    position: absolute;
-    bottom: 3px;
-    left: 10px;
-    width: calc(100% - 20px);
-    height: 8px;
-    pointer-events: none;
+  position: absolute;
+  bottom: 3px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: 8px;
+  pointer-events: none;
 }
 
 .beat-marker-overlay {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background: rgba(0,123,255,0.3);
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: rgba(0, 123, 255, 0.3);
+  z-index: 1;
 }
-
 .beat-marker-overlay.major-beat {
-    width: 2px;
-    background: rgba(0,123,255,0.6);
-    height: 120%;
-    top: -10%;
+  width: 2px;
+  background: rgba(0, 123, 255, 0.6);
+  height: 120%;
+  top: -10%;
 }
-
 .beat-marker-overlay.major-beat::before {
-    content: attr(data-beat);
-    position: absolute;
-    top: -15px;
-    left: -4px;
-    font-size: 9px;
-    color: #007bff;
-    font-weight: bold;
+  content: attr(data-beat);
+  position: absolute;
+  top: -15px;
+  left: -4px;
+  font-size: 9px;
+  color: #007bff;
+  font-weight: bold;
 }
 
-/* Pulsing animation for active beats */
 @keyframes beat-pulse-overlay {
-    0% {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        transform: scaleY(1);
-    }
-    50% {
-        box-shadow: 0 2px 8px rgba(0,123,255,0.6);
-        transform: scaleY(1.5);
-    }
-    100% {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        transform: scaleY(1);
-    }
-}
-
-.tempo-progress-overlay.beating {
-    animation: beat-pulse-overlay 0.15s ease-out;
-}
-
-/* Show overlay when playing */
-.musical-notation-container.playing .tempo-bar-overlay {
-    display: block !important;
-}
-
-/* Optional: Add a subtle background highlight when playing */
-.musical-notation-container.playing {
-    background: #e8f4fd;
-    transition: background-color 0.2s ease;
+  0% {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transform: scaleY(1);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.6);
+    transform: scaleY(1.5);
+  }
+  100% {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transform: scaleY(1);
+  }
 }

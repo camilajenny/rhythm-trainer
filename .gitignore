@@ -21,3 +21,7 @@ yarn-error.log
 .phpstorm*
 _ide_helper.php
 .DS_Store
+
+.sass-cache
+resources/**/*.css.map
+resources/sass/*.css

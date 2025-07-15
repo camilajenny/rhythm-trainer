@@ -46,15 +46,12 @@ The principles of this boilerplate are to;
  - Add many convenient features useful for writing APIs
  - Maintain a high level of performance
 
-## Documentation
-For setup, usage guidance, and all other docs - please consult the [Project Wiki](https://github.com/specialtactics/l5-api-boilerplate/wiki).
+# Development
 
-## Contributing
-
-If you would like to contribute to this project, please feel free to submit a pull request. If you plan to do any major work - it may be worthwhile messaging the author beforehand to explain your plans and get them approved.
-
-Please keep in mind, this package is only the template portion of the boilerplate, the main portion is [l5-api](https://github.com/specialtactics/l5-api). 
-Before adding any new functionality, you should consider whether it's possible at all to keep it out of this project and rather put it into l5-api, as that is preferred.
+To compile SASS and move JS, webpack mix is used; it can be run using (see `package.json`):
+```
+npm run watch
+```
 
 ## Check out the documentation of supporting projects
 
@@ -78,6 +75,3 @@ I have tried to include only the packages thought absolutely necessary, so here 
  - [Bugsnag for Laravel](https://github.com/bugsnag/bugsnag-laravel)
  - [Sentry](https://github.com/getsentry/sentry-laravel)
 
-## License
- 
-This boilerplate, much like the Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
