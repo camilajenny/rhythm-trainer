@@ -19,7 +19,7 @@ use Specialtactics\L5Api\Http\Middleware\CheckUserRole;
  * Welcome route - link to any public API documentation here
  */
 Route::get('/', function () {
-    echo 'Welcome to our API';
+    return redirect('/exercises');
 });
 
 /** @var \Dingo\Api\Routing\Router $api */
