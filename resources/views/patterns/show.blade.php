@@ -2,6 +2,7 @@
 
 @push('styles')
     <link rel="stylesheet" href={{ asset("/css/rhythm-player.css") }}>
+    <link rel="stylesheet" href={{ asset("/css/tempo-bar.css") }}>
 @endpush
 
 @section('content')
@@ -16,7 +17,13 @@
         <tr>
             <td>{{ $pattern->name }}</td>
             <td>{{ $pattern->time_signature }}</td>
-            <td class="musical-notation">{{ $pattern->musical_notation }}</td>
+            <td class="musical-notation-container">
+                <div class="musical-notation">{{ $pattern->musical_notation }}</div>
+                <div id="tempo-bar-overlay" class="tempo-bar-overlay" style="display: none;">
+                    <div id="tempo-progress-overlay" class="tempo-progress-overlay"></div>
+                    <div id="beat-markers-overlay" class="beat-markers-overlay"></div>
+                </div>
+            </td>
             <td>
                 <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano2.wav"
                         data-bpm="90">
