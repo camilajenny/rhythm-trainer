@@ -49,6 +49,6 @@ class Exercise extends BaseModel
 
     public function rhythmTracks()
     {
-        return $this->hasMany(RhythmTrack::class);
+        return $this->hasMany(RhythmTrack::class)->orderBy('track_index');
     }
 }
