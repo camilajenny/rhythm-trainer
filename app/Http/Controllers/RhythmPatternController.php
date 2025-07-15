@@ -22,4 +22,8 @@ class RhythmPatternController extends Controller
         $patterns = RhythmPattern::all(); // optionally with relationships
         return view('patterns.index', compact('patterns'));
     }
+
+    public function show(RhythmPattern $pattern) {
+        return view('patterns.show', compact('pattern'));
+    }
 }

@@ -12,6 +12,7 @@
         <th>Name</th>
         <th>Time Signature</th>
         <th>Pattern Data</th>
+        <th>Play</th>
     </tr>
     @foreach ($patterns as $pattern)
         <tr>
@@ -19,7 +20,8 @@
             <td>{{ $pattern->time_signature }}</td>
             <td class="musical-notation">{{ $pattern->musical_notation }}</td>
             <td>
-                <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano1.wav" data-bpm="90">
+                <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano1.wav"
+                        data-bpm="90">
                     ▶️
                 </button>
             </td>

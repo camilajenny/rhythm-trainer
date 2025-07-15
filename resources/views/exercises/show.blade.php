@@ -5,18 +5,19 @@
 <h2>Rhythm Tracks</h2>
 <table>
     <tr>
-        <th>Order</th>
         <th>Pattern Name</th>
         <th>Time Signature</th>
         <th>BPM</th>
     </tr>
     @foreach ($exercise->rhythmTracks as $track)
-{{--        @dd($track)--}}
         <tr>
-            <td>{{ $track->track_index ?? '⚠️ missing pattern' }}</td>
-            <td>{{ $track->rhythmPattern->name ?? '⚠️ missing pattern' }}</td>
-            <td>{{ $track->rhythmPattern->time_signature ?? '⚠️ missing pattern' }}</td>
-            <td>{{ $track->rhythmPattern->bpm ?? '⚠️ missing pattern' }}</td>
+            <td>
+                <a href="{{ route('patterns.show', ['pattern' => $track->rhythm_pattern_id]) }}">
+                    {{ $track->rhythmPattern->name }}
+                </a>
+            </td>
+            <td>{{ $track->rhythmPattern->time_signature }}</td>
+            <td>{{ $track->rhythmPattern->bpm }}</td>
         </tr>
     @endforeach
 </table>

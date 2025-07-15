@@ -9,6 +9,10 @@ class RhythmPattern extends BaseModel
 {
     use HasFactory;
 
+    public $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
+
     /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
      */
