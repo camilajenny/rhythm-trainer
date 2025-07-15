@@ -1,32 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Rhythm Trainer</title>
-    <link rel="stylesheet" href="/css/rhythm-player.css">
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Rhythm Patterns</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Time Signature</th>
-        <th>Pattern Data</th>
-        <th>Play</th>
-    </tr>
-    <tr>
-        <td>{{ $pattern->name }}</td>
-        <td>{{ $pattern->time_signature }}</td>
-        <td class="musical-notation">{{ $pattern->musical_notation }}</td>
-        <td>
-            <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano2.wav"
-                    data-bpm="90">
-                ▶️
-            </button>
-        </td>
-    </tr>
-</table>
+@push('styles')
+    <link rel="stylesheet" href={{ asset("/css/rhythm-player.css") }}>
+@endpush
 
-<script src="/js/rhythm-player.js"></script>
-</body>
-</html>
+@section('content')
+    <h1>Rhythm Patterns</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Time Signature</th>
+            <th>Pattern Data</th>
+            <th>Play</th>
+        </tr>
+        <tr>
+            <td>{{ $pattern->name }}</td>
+            <td>{{ $pattern->time_signature }}</td>
+            <td class="musical-notation">{{ $pattern->musical_notation }}</td>
+            <td>
+                <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano2.wav"
+                        data-bpm="90">
+                    ▶️
+                </button>
+            </td>
+        </tr>
+    </table>
+@endsection
+
+@push('scripts')
+    <script src={{ asset("/js/rhythm-player.js") }}></script>
+@endpush
