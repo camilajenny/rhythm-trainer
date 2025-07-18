@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector('.musical-notation-container');
     const listenButton = document.querySelector('.play-sample');
     const tapButton = document.getElementById('start-tapping');
+    const countdownOverlay = document.getElementById('countdown-overlay');
+    const tempoOverlay = document.getElementById('tempo-bar-overlay');
     const tempoProgress = document.getElementById('tempo-progress-overlay');
     const beatMarkers = document.getElementById('beat-markers-overlay');
     const tapFeedbackLayer = document.getElementById('tap-feedback-layer');
@@ -10,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container || !listenButton || !tapButton) return;
 
     // --- STATE & RHYTHM DATA ---
-    let state = 'idle'; // idle, listening, ready_to_tap, tapping
+    let state = 'idle'; // idle, countdown, listening, ready_to_tap, tapping
     let metronomeIntervalId = null;
     const rhythmData = {
         pattern: JSON.parse(listenButton.dataset.pattern),
@@ -23,15 +25,37 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     let rhythmStartTime = 0;
 
+    // --- COUNTDOWN FUNCTION ---
+    const startCountdown = (count = 4) => {
+        return new Promise(resolve => {
+            state = 'countdown';
+            updateUI();
+            countdownOverlay.style.display = 'flex';
+
+            const beatIntervalMs = 60000 / rhythmData.bpm;
+            let currentCount = count;
+
+            const countdownInterval = setInterval(() => {
+                if (currentCount > 0) {
+                    countdownOverlay.textContent = currentCount;
+                    if (rhythmData.metronomeSrc) new Audio(rhythmData.metronomeSrc).play();
+                    currentCount--;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownOverlay.style.display = 'none';
+                    resolve();
+                }
+            }, beatIntervalMs);
+        });
+    };
+
+
     // --- METRONOME FUNCTIONS ---
-
     const startMetronome = () => {
-        if (metronomeIntervalId) clearInterval(metronomeIntervalId); // Clear any existing
+        if (metronomeIntervalId) clearInterval(metronomeIntervalId);
         if (!rhythmData.metronomeSrc) return;
-
         const metronomeAudio = new Audio(rhythmData.metronomeSrc);
         const beatIntervalMs = 60000 / rhythmData.bpm;
-
         metronomeIntervalId = setInterval(() => {
             metronomeAudio.currentTime = 0;
             metronomeAudio.play();
@@ -46,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // --- CORE LOGIC ---
-
     const prepareRhythm = () => {
         const quarterNoteDuration = 60 / rhythmData.bpm;
         let currentTime = 0;
@@ -60,15 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
         rhythmData.totalDurationMs = currentTime * 1000;
     };
 
-    const playListeningMode = () => {
+    const playListeningMode = async () => {
         if (state !== 'idle' && state !== 'ready_to_tap') return;
+
+        await startCountdown(4);
+
         state = 'listening';
         updateUI();
         startMetronome();
-
-        let currentTimeMs = 0;
         startTempoBarOverlay();
 
+        let currentTimeMs = 0;
         rhythmData.pattern.forEach((duration) => {
             setTimeout(() => {
                 new Audio(rhythmData.audioSrc).play();
@@ -85,8 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }, rhythmData.totalDurationMs + 200);
     };
 
-    const startTappingMode = () => {
+    const startTappingMode = async () => {
         if (state !== 'ready_to_tap') return;
+
+        await startCountdown(4);
+
         state = 'tapping';
         updateUI();
         startMetronome();
@@ -109,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const closestNoteTime = rhythmData.noteStartTimes.reduce((prev, curr) =>
             Math.abs(curr - tapTime) < Math.abs(prev - tapTime) ? curr : prev
         );
-
         const isCorrect = Math.abs(tapTime - closestNoteTime) <= 0.15;
         createTapMarker(tapTime, isCorrect);
     };
@@ -123,12 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // --- UI & OVERLAY FUNCTIONS ---
-
     const updateUI = () => {
-        listenButton.disabled = state === 'listening' || state === 'tapping';
-        tapButton.disabled = state === 'listening' || state === 'tapping';
-        tapButton.style.display = state === 'idle' || state === 'listening' ? 'none' : 'inline-block';
-        listenButton.innerHTML = state === 'idle' ? '▶️ Listen' : 'Listen Again';
+        const isBusy = state === 'listening' || state === 'tapping' || state === 'countdown';
+        listenButton.disabled = isBusy;
+        tapButton.disabled = isBusy;
+        tapButton.style.display = (state === 'idle' || state === 'listening' || state === 'countdown') ? 'none' : 'inline-block';
+        listenButton.innerHTML = (state === 'idle' && state !== 'countdown') ? '▶️ Listen' : 'Listen Again';
     };
 
     const startTempoBarOverlay = () => {

@@ -18,6 +18,8 @@
             <td>{{ $pattern->name }}</td>
             <td>{{ $pattern->time_signature }}</td>
             <td class="musical-notation-container" data-metronome-src="/samples/metronome/metronome-beep.wav">
+                <div id="countdown-overlay" class="countdown-overlay" style="display: none;"></div>
+
                 <div class="musical-notation">
                     @foreach($pattern->musical_notation as [$note, $duration])
                         <span class="note" data-duration="{{ $duration }}">{{ $note }}</span>
@@ -27,7 +29,7 @@
                     <div id="tempo-progress-overlay" class="tempo-progress-overlay"></div>
                     <div id="beat-markers-overlay" class="beat-markers-overlay"></div>
                 </div>
-                {{-- This is the new tap feedback area --}}
+
                 <div id="tap-feedback-layer" class="tap-feedback-layer"></div>
             </td>
             <td>
