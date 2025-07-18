@@ -18,7 +18,11 @@
             <td>{{ $pattern->name }}</td>
             <td>{{ $pattern->time_signature }}</td>
             <td class="musical-notation-container">
-                <div class="musical-notation">{{ $pattern->musical_notation }}</div>
+                <div class="musical-notation">
+                    @foreach($pattern->musical_notation as [$note, $duration])
+                        <span class="note" data-duration="{{ $duration }}">{{ $note }}</span>
+                    @endforeach
+                </div>
                 <div id="tempo-bar-overlay" class="tempo-bar-overlay" style="display: none;">
                     <div id="tempo-progress-overlay" class="tempo-progress-overlay"></div>
                     <div id="beat-markers-overlay" class="beat-markers-overlay"></div>

@@ -1,7 +1,40 @@
 @import url("table.css");
 
+:root {
+    --duration: 3rem;
+}
+
 .musical-notation {
     font-family: 'Noto Music', 'Times New Roman', serif;
     font-size: 1.8em;
-    letter-spacing: 0.3em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 2em;
+    white-space: nowrap;
 }
+
+.musical-notation .note[data-duration="4"] {
+    width: calc(var(--duration)*4);
+}
+
+.musical-notation .note[data-duration="2"] {
+    width: calc(var(--duration)*2);
+}
+
+.musical-notation .note[data-duration="1"] {
+    width: calc(var(--duration)*1);
+}
+
+.musical-notation .note[data-duration="0.5"] {
+    width: calc(var(--duration)*0.5);
+}
+
+.musical-notation .note[data-duration="0.25"] {
+    width: calc(var(--duration)*0.25);
+}
+
+.musical-notation .note[data-duration="0.125"] {
+    width: calc(var(--duration)*0.125);
+}
+
