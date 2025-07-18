@@ -3,26 +3,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector('.musical-notation-container');
     const listenButton = document.querySelector('.play-sample');
     const tapButton = document.getElementById('start-tapping');
-    const tempoOverlay = document.getElementById('tempo-bar-overlay');
     const tempoProgress = document.getElementById('tempo-progress-overlay');
     const beatMarkers = document.getElementById('beat-markers-overlay');
     const tapFeedbackLayer = document.getElementById('tap-feedback-layer');
 
     if (!container || !listenButton || !tapButton) return;
 
-    // --- STATE ---
+    // --- STATE & RHYTHM DATA ---
     let state = 'idle'; // idle, listening, ready_to_tap, tapping
+    let metronomeIntervalId = null;
     const rhythmData = {
         pattern: JSON.parse(listenButton.dataset.pattern),
         audioSrc: listenButton.dataset.src,
+        metronomeSrc: container.dataset.metronomeSrc,
         bpm: parseInt(listenButton.dataset.bpm, 10),
         noteStartTimes: [],
         totalDuration: 0,
         totalDurationMs: 0,
     };
-    let rhythmStartTime = 0; // For tap evaluation timing
+    let rhythmStartTime = 0;
 
-    // --- FUNCTIONS ---
+    // --- METRONOME FUNCTIONS ---
+
+    const startMetronome = () => {
+        if (metronomeIntervalId) clearInterval(metronomeIntervalId); // Clear any existing
+        if (!rhythmData.metronomeSrc) return;
+
+        const metronomeAudio = new Audio(rhythmData.metronomeSrc);
+        const beatIntervalMs = 60000 / rhythmData.bpm;
+
+        metronomeIntervalId = setInterval(() => {
+            metronomeAudio.currentTime = 0;
+            metronomeAudio.play();
+        }, beatIntervalMs);
+    };
+
+    const stopMetronome = () => {
+        if (metronomeIntervalId) {
+            clearInterval(metronomeIntervalId);
+            metronomeIntervalId = null;
+        }
+    };
+
+    // --- CORE LOGIC ---
 
     const prepareRhythm = () => {
         const quarterNoteDuration = 60 / rhythmData.bpm;
@@ -41,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (state !== 'idle' && state !== 'ready_to_tap') return;
         state = 'listening';
         updateUI();
+        startMetronome();
 
         let currentTimeMs = 0;
         startTempoBarOverlay();
@@ -55,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             hideTempoBarOverlay();
+            stopMetronome();
             state = 'ready_to_tap';
             updateUI();
         }, rhythmData.totalDurationMs + 200);
@@ -64,11 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (state !== 'ready_to_tap') return;
         state = 'tapping';
         updateUI();
+        startMetronome();
 
-        tapFeedbackLayer.innerHTML = ''; // Clear previous taps
+        tapFeedbackLayer.innerHTML = '';
         rhythmStartTime = performance.now();
 
         setTimeout(() => {
+            stopMetronome();
             state = 'ready_to_tap';
             updateUI();
         }, rhythmData.totalDurationMs + 500);
@@ -83,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.abs(curr - tapTime) < Math.abs(prev - tapTime) ? curr : prev
         );
 
-        const isCorrect = Math.abs(tapTime - closestNoteTime) <= 0.15; // 150ms tolerance
+        const isCorrect = Math.abs(tapTime - closestNoteTime) <= 0.15;
         createTapMarker(tapTime, isCorrect);
     };
 
@@ -94,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
         marker.style.left = `${(tapTime / rhythmData.totalDuration) * feedbackLayerWidth}px`;
         tapFeedbackLayer.appendChild(marker);
     };
+
+    // --- UI & OVERLAY FUNCTIONS ---
 
     const updateUI = () => {
         listenButton.disabled = state === 'listening' || state === 'tapping';

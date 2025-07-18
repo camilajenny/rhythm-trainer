@@ -17,7 +17,7 @@
         <tr>
             <td>{{ $pattern->name }}</td>
             <td>{{ $pattern->time_signature }}</td>
-            <td class="musical-notation-container">
+            <td class="musical-notation-container" data-metronome-src="/samples/metronome/metronome-beep.wav">
                 <div class="musical-notation">
                     @foreach($pattern->musical_notation as [$note, $duration])
                         <span class="note" data-duration="{{ $duration }}">{{ $note }}</span>
