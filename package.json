@@ -16,6 +16,7 @@
   },
   "private": true,
   "devDependencies": {
+    "glob": "^11.0.3",
     "laravel-mix": "^6.0.49",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.89.2",

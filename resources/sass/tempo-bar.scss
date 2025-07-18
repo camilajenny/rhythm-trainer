@@ -1,13 +1,4 @@
-// Variables
-$primary-color: #007bff;
-$primary-dark: #0056b3;
-$primary-light: #e8f4fd;
-$background-light: #f8f9fa;
-$border-color: #dee2e6;
-$text-color: #495057;
-$shadow-light: rgba(0, 0, 0, 0.3);
-$shadow-primary: rgba(0, 123, 255, 0.5);
-$shadow-primary-strong: rgba(0, 123, 255, 0.6);
+@import 'constants';
 
 // Musical notation container
 .musical-notation-container {
