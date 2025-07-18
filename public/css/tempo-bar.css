@@ -6,11 +6,11 @@
   background: #f8f9fa;
   border-radius: 8px;
 }
-.musical-notation-container.playing {
+.musical-notation-container.listening {
   background: #e8f4fd;
   transition: background-color 0.2s ease;
 }
-.musical-notation-container.playing .tempo-bar-overlay {
+.musical-notation-container.listening .tempo-bar-overlay {
   display: block !important;
 }
 

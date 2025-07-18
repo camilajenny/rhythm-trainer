@@ -33,7 +33,10 @@
             <td>
                 <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano2.wav"
                         data-bpm="90">
-                    ▶️
+                    ▶️ Listen
+                </button>
+                <button id="start-tapping" data-pattern="@json($pattern->pattern_data)" data-bpm="90" style="display: none;">
+                    ⌨️ Tap Along
                 </button>
             </td>
         </tr>
