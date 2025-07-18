@@ -27,6 +27,8 @@
                     <div id="tempo-progress-overlay" class="tempo-progress-overlay"></div>
                     <div id="beat-markers-overlay" class="beat-markers-overlay"></div>
                 </div>
+                {{-- This is the new tap feedback area --}}
+                <div id="tap-feedback-layer" class="tap-feedback-layer"></div>
             </td>
             <td>
                 <button class="play-sample" data-pattern="@json($pattern->pattern_data)" data-src="/samples/piano2.wav"
@@ -36,8 +38,13 @@
             </td>
         </tr>
     </table>
+
+    <div class="instructions" style="text-align: center; margin-top: 1rem; color: #6c757d;">
+        Press any key to tap along with the rhythm when playback starts.
+    </div>
 @endsection
 
 @push('scripts')
     <script src={{ asset("/js/rhythm-player.js") }}></script>
+    <script src={{ asset("js/tap_evaluation_rhythm_player.js") }}></script>
 @endpush
