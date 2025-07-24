@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/camilajenny/rhythm-trainer/actions/workflows/ci.yml/badge.svg)](https://github.com/camilajenny/rhythm-trainer/actions/workflows/ci.yml)
+
 ### 🎵 Rhythm Imitation App (Laravel + JS)
 
 A desktop-focused web app for **practicing and evaluating rhythm imitation**, inspired by apps like [Complete Rhythm Trainer](https://play.google.com/store/apps/details?id=com.binaryguilt.completerhythmtrainer) and [Rhythmer](https://play.google.com/store/apps/details?id=ru.demax.rhythmerr).
