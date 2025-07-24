@@ -1,4 +1,4 @@
-@import 'constants';
+@use 'constants' as *;
 
 .countdown-overlay {
     position: absolute;

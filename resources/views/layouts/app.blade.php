@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Rhythm Trainer')</title>
+
+    @vite(['resources/js/app.js'])
     @stack('styles') {{-- for optional extra styles in children --}}
 </head>
 <body>
