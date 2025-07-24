@@ -11,6 +11,7 @@ class Exercise extends BaseModel
 
     public $primaryKey = 'id';
     protected $keyType = 'integer';
+    public $incrementing = true;
 
     /**
      * @var null|array What relations should one model of this entity be returned with, from a relevant controller
