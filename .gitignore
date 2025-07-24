@@ -28,3 +28,4 @@ resources/sass/*.css
 
 public/css/constants.css
 resources/styles/*.css
+public/build
